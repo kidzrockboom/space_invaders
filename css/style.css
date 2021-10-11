@@ -1,0 +1,35 @@
+body {
+    background-image: linear-gradient(1500deg, #c0b2c9, #afb3db);
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body h1 {
+    font-family: 'Press Start 2P', cursive;    
+    font-size: 7rem;
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.selection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selection button {
+    color: white;
+    margin-right: 5px;
+    font-size: 3rem;
+    border: none;
+    background: rgb(91, 182, 235);
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.selection button:hover {
+    color: black;
+    background: rgb(255, 255, 255);
+
+}
