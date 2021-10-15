@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,23 +15,41 @@
         <header class="navbar">
             <div class="nav">
                 <ul>
-                    <li> <a href="game.html"> Login </a></li> 
-                    <li> <a href=highscore.html> Register </a></li>                    
+                    <li> <a href=index.html> Home </a></li> 
+                    <li> <a href="game.html"> Play </a></li> 
+                    <li> <a href=highscore.html> High Score </a></li> 
+                    <li> <a href=Register.html> Register </a></li>                    
                 </ul>
             </div>
         </header>
 
     <h1>SPACE INVADERS</h2>
 
+      
+
     <div class="selection">
         <button href="game.html">Play</button>
-        <button href="game.html">Highscore</button>
-        <button href="game.html">Controls</button>
-        <button href="game.html">How to play</button>
+        <button href="game.html">LOGIN</button>
     </div>
 
+
+    <form action="/my-handling-form-page" method="post">
+      <ul>
+       <li>
+          <label for="user_name">Username:</label>
+          <input type="text" id="username" name="user_name">
+        </li>
+       <li>
+         <label for="password">Password:</label>
+         <input type="password" id="password" name="password">
+       </li>
+       <li class="button">
+          <button type="submit">LOGIN</button>
+      </li>
+      </ul>
+     </form>
     <div class="carousel_images">
-        <p>This carousel is created with HTML and CSS only.</p>
+        <p>Space invaders is a classic game made by Tomohiro Nishikado, here are some images of how the game looks and I hope you enjoy the game. </p>
 
         <section class="carousel" aria-label="Gallery">
           <ol class="carousel__viewport">
