@@ -12,19 +12,13 @@
 </head>
 <body>
     
-        <header class="navbar">
-            <div class="nav">
-                <ul>
-                    <li> <a href=index.html> Home </a></li> 
-                    <li> <a href="game.html"> Play </a></li> 
-                    <li> <a href=highscore.html> High Score </a></li> 
-                    <li> <a href=Register.html> Register </a></li>                    
-                </ul>
-            </div>
-        </header>
+    <?php
+        include('php/navbar.php');
+    ?>
 
     <h1>SPACE INVADERS</h2>
-
+      
+      
       
 
     <div class="selection">
