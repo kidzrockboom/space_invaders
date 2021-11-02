@@ -15,7 +15,7 @@
         include('php/navbar.php');
     ?>
 
-
+    <form action="/"></form>
     <form action="/game.php" method="post">
         <ul>
          <li>

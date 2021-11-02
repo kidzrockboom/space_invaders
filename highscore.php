@@ -16,20 +16,47 @@
     ?>
 
 
-    <p>Top 5 high scores</p>
-
     
-    <div class="score">
-        
-        <ol>
-            <li>Richard </li>
-            <li>Richard </li>
-            <li>Richard </li>
-            <li>Richard </li>
-            <li>Richard </li>
-            <li>Richard </li>
-        </ol>
-    </div>
+    <table class="score">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Richard</td>
+                <td>100</td>
+            </tr>
+            <tr class="active-row">
+                <td>Shreyas</td>
+                <td>90</td>
+            </tr>
+            <tr>
+                <td>Jubair</td>
+                <td>80</td>
+            </tr>
+            <tr>
+                <td>Anil</td>
+                <td>80</td>
+            </tr>
+            <tr>
+                <td>Harsha</td>
+                <td>70</td>
+            </tr>
+            <tr>
+                <td>Akshith</td>
+                <td>60</td>
+            </tr>
+            <tr>
+                <td>Adesh</td>
+                <td>50</td>
+            </tr>
+        </tbody>
+    </table>
+    
     
 </body>
 </html>

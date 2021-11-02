@@ -1,12 +1,11 @@
 
-    <header class="navbar">
-    <div class="nav">
-    <ul>
-    <li> <a href=index.php> Home </a></li>
-    <li> <a href="game.php"> Play </a></li> 
-    <li> <a href=highscore.php> High Score </a></li>
-    <li> <a href=Register.php> Register </a></li>                    
-    </ul>
-    </div>
-    </header>
+    <nav>
+        <a href="index.php">Home</a>
+        <a href="game.php">Play</a>
+        <a href="highscore.php">highscore</a>
+        <a href="Register.php">Register</a>
+        <a href="#"> User </a>
+        <div class="animation start-home"></div>
+    </nav>
 
+    
