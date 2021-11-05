@@ -11,8 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-    <?php
-        include('php/navbar.php');
+<?php 
+      require_once("php/navbar.php");
+      displayNav();
     ?>
 
 
