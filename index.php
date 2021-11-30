@@ -42,7 +42,7 @@
     </div> -->
 
 
-    <form class="signup-form" action="/Register.php" method="post">
+    <form class="signup-form">
       <!-- Header -->
       <div class="form-header">
         <h1>Login</h1>
@@ -67,12 +67,12 @@
       <!-- Footer -->
       <div class="form-footer">
         <span>* Required </span>
-        <button type="submit" class="btn"> Login </button>
+        <button onclick="login()" class="btn"> Login </button>
       </div>
     </form>
     
     
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
 </body>
 </html>
