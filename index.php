@@ -54,19 +54,19 @@
       <!-- Username -->
       <div class="form-group">
         <label for="username" class="label-title">Username *</label>
-        <input type="text" id="username" class="form-input" placeholder="enter your username" required="required">
+        <input type="text" id="logUsername" class="form-input" placeholder="enter your username" required="required">
       </div>
 
       <!-- Password -->
       <div class="form-group">
         <label for="password" class="label-title">Password *</label>
-        <input type="password" id="password" class="form-input" placeholder="enter your password" required="required">
+        <input type="password" id="logPassword" class="form-input" placeholder="enter your password" required="required">
       </div>
     </div>
 
       <!-- Footer -->
       <div class="form-footer">
-        <span>* Required </span>
+        <span id="info">* Required </span>
         <button onclick="login()" class="btn"> Login </button>
       </div>
     </form>

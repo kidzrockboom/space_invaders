@@ -45,7 +45,7 @@
       <!-- Email -->
       <div class="form-group">
         <label for="email" class="label-title">Email *</label>
-        <input type="email" id="email" class="form-input" placeholder="enter your email">
+        <input onclick="clearEmail()" type="email" id="email" class="form-input" placeholder="enter your email">
       </div>
 
       <!-- Password -->
@@ -58,7 +58,7 @@
 
         <div class="form-group right">
           <label for="confirm-password" class="label-title">Confirm Password *</label>
-          <input type="password" class="form-input" id="confirm-password" placeholder="enter your password again">
+          <input onclick="clearPass2()" type="password" class="form-input" id="confirm-password" placeholder="enter your password again">
         </div>
 
       </div>
