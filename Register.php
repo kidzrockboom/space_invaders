@@ -26,7 +26,7 @@
     <div class="form-body">
         <div class="horizontal-group">
           <div class="form-group left">
-            <label for="firstname" class="label-title"> First name *</label>
+            <label for="firstname" class="label-title"> First name </label>
             <input type="text" id="firstname" class="form-input" placeholder="enter your firstname">
           </div>
           <div class="form-group right">

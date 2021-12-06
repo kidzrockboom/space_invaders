@@ -30,41 +30,30 @@ function login() {
     })
 
     for (let key of userPass) {
-        if (key[0] !== username) {
+        if (key[0] === username) {
             if (key[1] === password) {
-                // User can login
+                console.log("Login successful")
             } else {
                 loginInfo.innerHTML = "Password is incorrect";
+                loginInfo.style.fontWeight = "bold";
+                loginInfo.style.color = "black";
             }
         } else {
-            // Invalid Username
-        }
-    }
-
-
-    values.forEach(item => {
-        if (item.username !== username) {
-            if (atob(item.password) === password) {
-                // User can login 
-            } else {
-                // password incorrect
-            }
-        } else {
-            // invalid email
-            
-        }
-    });
-
-
-    if (values[0].username === username) {
-        if (values[0].password === password) {
-            
+            loginInfo.innerHTML = "Your Username is invalid";
+            loginInfo.style.fontWeight = "bold";
+            loginInfo.style.color = "black";
         }
     }
 }
 
 // Function to reset the Username field after validation check
 function clearUser() {
+    let userInfo = document.getElementById('feedback');
+
+    userInfo.innerHTML = "* Required ";
+    userInfo.style.fontWeight = "bold";
+    userInfo.style.color = "grey";
+
     let uname = document.getElementById('username');
     uname.style.borderColor = "#d6d6d6";
     uname.focus();
@@ -86,7 +75,13 @@ function clearEmail() {
 }
 
 // Function to reset the Password field after validation check
-function clearPass(){    
+function clearPass(){  
+    let PassInfo = document.getElementById('feedback');
+
+    PassInfo.innerHTML = "* Required ";
+    PassInfo.style.fontWeight = "bold";
+    PassInfo.style.color = "grey";
+    
     let pswd = document.getElementById('password');
     pswd.style.borderColor = "#d6d6d6";
     pswd.type = "password";
@@ -105,55 +100,73 @@ function clearPass2() {
 // Function to validate the register page and makes sure inputs are correct
 function register() {
 
-    let user = document.getElementById('username').value;
-    let pass1 = document.getElementById('password').value;
-    let pass2 = document.getElementById('confirm-password').value;
-    let emailInfo = document.getElementById('feedback');
+    let user = document.getElementById('username');
+    let emailReg = document.getElementById('email');
+    let pass1 = document.getElementById('password');
+    let pass2 = document.getElementById('confirm-password');
+    let RegInfo = document.getElementById('feedback');
 
     // Checks if inputs fields are empty for important information
-    if (user === "") {
-        let warning = document.getElementById('username');
-        warning.style.borderColor = "red";
-        warning.style.border = "bold";
-        warning.value = "Enter a Username";
-        warning.focus();
+    if (user.value === "") {        
+        user.style.borderColor = "red";
+        user.style.border = "bold";
+        user.value = "Enter a Username";
+        user.focus();
         return false;
     }
 
-    if (pass1 === "") {
-        let warning = document.getElementById('password');
-        warning.style.borderColor = "red";
-        warning.value = "Enter a Password";
-        warning.type = "text";
-        warning.focus();
+    if (pass1.value === "") {
+        pass1.style.borderColor = "red";
+        pass1.value = "Enter a Password";
+        pass1.type = "text";
+        pass1.focus();
         return false;
     }
 
-    if (pass1 !== pass2) {
-        let warning = document.getElementById('confirm-password');
-        warning.style.borderColor = "red";
-        warning.value = "Enter your password again";
-        warning.type = "text";
-        warning.focus();
+    if (!(pass1.value.length > 8)) {
+        pass1.style.borderColor = "red";
+        RegInfo.innerHTML = "* Password is too short";
+        RegInfo.style.fontWeight = "bold";
+        RegInfo.style.color = "black";
+        pass1.focus();
+        return false;
+    }
+    
+
+    if (pass1.value !== pass2.value) {
+        pass2.style.borderColor = "red";
+        pass2.value = "Enter your password again";
+        pass2.type = "text";
+        pass2.focus();
         return false;
     }
 
     // Checks the email input with regex to make sure it is a standard email
-    let emailReg = document.getElementById('email');
+    let emailFilter = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    let filter = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    if (emailReg.value.match(filter)) {
-        console.log("The email is ok");
+    if (emailReg.value.match(emailFilter)) {
+        
     } else {
-        let warning = document.getElementById('email');
-        warning.style.borderColor = "red";
-        warning.style.border = "bold";
-        emailInfo.innerHTML = "Email is Incorrect";
-        emailInfo.style.fontWeight = "bold";
-        emailInfo.style.color = "black";
-        console.log("This email is invalid");
+        emailReg.style.borderColor = "red";
+        emailReg.style.border = "bold";
+        RegInfo.innerHTML = "* Email is Incorrect";
+        RegInfo.style.fontWeight = "bold";
+        RegInfo.style.color = "black";
         emailReg.focus();
+        return false;
+    }
+
+    let passFilter = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+
+    if (pass1.value.match(passFilter)) {
+        console.log("The password is ok");
+    } else {
+        pass1.style.borderColor = "red";
+        pass1.style.border = "bold";
+        RegInfo.innerHTML = "* Password needs one number and special character";
+        RegInfo.style.fontWeight = "bold";
+        RegInfo.style.color = "black";
+        pass1.focus();
         return false;
     }
 
@@ -164,7 +177,7 @@ function register() {
     users.lastname = document.getElementById('lastname').value;
     users.username = document.getElementById('username').value;
     users.email = document.getElementById('email').value;
-    users.password = btoa(document.getElementById('password').value);
+    users.password = document.getElementById('password').value;
 
     localStorage[users.username] = JSON.stringify(users);
     
