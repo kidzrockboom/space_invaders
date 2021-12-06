@@ -27,22 +27,7 @@
     <h1>SPACE INVADERS</h2>
 
 
-    
-
-     <!-- This will be used with javascript to display the login form onclick -->
-     <!-- <h1>ADD Gif of rocket blasting as a background</h1> 
-    <div class="intro">
-      
-
-    </div>
-
-    <div class="selection"> 
-        <button href="game.html">Play</button>
-        <button href="game.html">LOGIN</button>
-    </div> -->
-
-
-    <form class="signup-form">
+    <form onsubmit="return false;" class="signup-form">
       <!-- Header -->
       <div class="form-header">
         <h1>Login</h1>

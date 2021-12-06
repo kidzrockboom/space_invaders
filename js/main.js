@@ -73,6 +73,12 @@ function clearUser() {
 
 // Function to reset the Email field after validation check
 function clearEmail() {
+    let emailInfo = document.getElementById('feedback');
+
+    emailInfo.innerHTML = "* Required ";
+    emailInfo.style.fontWeight = "bold";
+    emailInfo.style.color = "grey";
+
     let uname = document.getElementById('email');
     uname.style.borderColor = "#d6d6d6";
     uname.focus();
@@ -102,6 +108,7 @@ function register() {
     let user = document.getElementById('username').value;
     let pass1 = document.getElementById('password').value;
     let pass2 = document.getElementById('confirm-password').value;
+    let emailInfo = document.getElementById('feedback');
 
     // Checks if inputs fields are empty for important information
     if (user === "") {
@@ -142,6 +149,9 @@ function register() {
         let warning = document.getElementById('email');
         warning.style.borderColor = "red";
         warning.style.border = "bold";
+        emailInfo.innerHTML = "Email is Incorrect";
+        emailInfo.style.fontWeight = "bold";
+        emailInfo.style.color = "black";
         console.log("This email is invalid");
         emailReg.focus();
         return false;

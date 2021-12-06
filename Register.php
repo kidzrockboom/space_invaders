@@ -68,7 +68,7 @@
 
       <!-- Footer -->
       <div class="form-footer">
-        <span>* Required </span>
+        <span id="feedback">* Required </span>
         <button type="button" onclick="register()" class="btn"> Create </button>
       </div>
     </form>
