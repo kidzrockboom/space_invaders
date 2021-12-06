@@ -49,7 +49,7 @@
       </div>
     </div>
 
-      <!-- Footer -->
+      <!-- Footer --> 
       <div class="form-footer">
         <span id="info">* Required </span>
         <button onclick="login()" class="btn"> Login </button>

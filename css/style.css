@@ -1,17 +1,3 @@
-/* body {
-    background-image: linear-gradient(1500deg, #c0b2c9, #afb3db);
-    color: black;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-body h1 {
-    font-family: 'Press Start 2P', cursive;    
-    font-size: 7rem;
-    display: flex;
-    justify-content: center;
-    margin-top: 3rem;
-} */
-
 @import url('httpss://fonts.googleapis.com/css?family=Roboto');
 
 
@@ -318,4 +304,13 @@ span {
 .score tbody tr.active-row {
   font-weight: bold;
   color: #009879;
+}
+
+
+/* Canvas for the game */
+main {
+  margin-top: 150px;
+  display: flex;
+  justify-content: center;
+  align-content: center
 }
