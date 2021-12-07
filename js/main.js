@@ -1,9 +1,9 @@
 // Function to retrieve all the user values in local storage and store them
 function allStorage() {
 
-    var values = [],
-        keys = Object.keys(localStorage),
-        i = keys.length;
+    let values = [],
+    keys = Object.keys(localStorage),
+    i = keys.length;
 
     while ( i-- ) {
         values.push( JSON.parse(localStorage.getItem(keys[i])) );
@@ -12,38 +12,45 @@ function allStorage() {
     return values;
 }
 
+values = allStorage();
+
 function login() {
     let user = document.getElementById('user');
     let loginInfo = document.getElementById('info');
-
-
     let username = document.getElementById('logUsername').value;
     let password = document.getElementById('logPassword').value;
 
-    values = allStorage();
 
-    const userPass = values.map(item => {
-        const container = {};
-
-        container[item.username] = item.password;
-        return container;
-    })
-
-    for (let key of userPass) {
-        if (key[0] === username) {
-            if (key[1] === password) {
+    if (values.username.includes(username)) {
+        if (values.password.includes(username)) {
                 console.log("Login successful")
-            } else {
-                loginInfo.innerHTML = "Password is incorrect";
-                loginInfo.style.fontWeight = "bold";
-                loginInfo.style.color = "black";
-            }
         } else {
-            loginInfo.innerHTML = "Your Username is invalid";
+                console.log("Invalid Password")
+            }
+    }   else {
+            console.log("Invalid Email")
+        }   
+
+
+    usernameList.forEach(item => {
+        if (username === item) {
+            passwordList.forEach(elem => {
+                if (password === elem) {
+                    console.log("Login Successful");
+                } else {
+                    loginInfo.innerHTML = "Your Username is invalid";
+                    loginInfo.style.fontWeight = "bold";
+                    loginInfo.style.color = "black";
+                    
+                }
+            });
+        } else {
+            loginInfo.innerHTML = "Password is incorrect";
             loginInfo.style.fontWeight = "bold";
             loginInfo.style.color = "black";
         }
-    }
+    });
+
 }
 
 // Function to reset the Username field after validation check
