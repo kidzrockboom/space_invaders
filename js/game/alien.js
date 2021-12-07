@@ -59,4 +59,9 @@ class Alien {
             this.currentImage = 1;
         }
     }
+
+    // Move the aliens downward
+    moveVertical() {
+        this.y += 25;
+      }
 }

@@ -59,7 +59,7 @@ class Ship {
     // Draws the amount of extra lives a player has
     drawLives() {
         fill(color(51, 255, 0));
-        let x = width - 105;
+        let x = width - 210;
         for (let i = 0; i < this.lives; i++) {
             this.drawShip(x, 25);
             x += 40;

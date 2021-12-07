@@ -51,8 +51,8 @@ function draw() {
     background(51);
     player.drawPlayer();
     player.moveShip();
-   // player.drawLives();
-    drawScore();
+    player.drawLives();
+    //drawScore();
     if (!pauseMode) {
       moveAllShipBullets();
       moveAllAlienBullets();
@@ -71,7 +71,7 @@ function draw() {
     drawAllAliens();
     hitAlien();
     hitPlayer();
-    if (allAliensKilled) {
+    if (allAliensHit) {
       print('All aliens killed!')
       resetAliens();
     }
@@ -121,8 +121,191 @@ function drawAllShipBullets() {
   }
 }
 
-function drawAllShipBullets() {
+function moveAllShipBullets() {
   for (let bullet of shipShots) {
     bullet.move();
+  }
+}
+
+function createAllAliens() {
+  let startingX = 70;
+  let startingY = 200;
+  // Creates aliens of bottom double rows 
+  for (let i = 0; i < 22; i++) {
+    aliens[i] = new Alien(startingX, startingY, 45, 45, alien1a, alien1b, 10);
+    startingX += 60;
+    if (startingX > width - 30) {
+      startingX = 70;
+      startingY -= 30;
+    }
+  }
+  // Creates aliens of middle double rows
+  for (let i = 22; i < 44; i++) {
+    aliens[i] = new Alien(startingX, startingY, 36, 28, alien1a, alien1b, 20);
+    startingX += 60;
+    if (startingX > width - 30) {
+      startingX = 70;
+      startingY -= 30;
+    }
+  }
+  // Creates aliens of top double
+  for (let i = 44; i < 55; i++) {
+    aliens[i] = new Alien(startingX, startingY, 45, 45, alien1a, alien1b, 50);
+    startingX += 60;
+    if (startingX > width - 30) {
+      startingX = 70;
+      startingY -= 30;
+    }
+  }
+}
+
+function drawAllAliens() {
+  for (let alien of aliens) {
+    alien.draw();
+  }
+}
+
+// Check if aliens touch the edge of the canvas
+function checkIfAliensReachedEdge() {
+  let edgeReached = false;
+  for (let alien of aliens) {
+    if ((alien.x < 15 && alien.alive) || (alien.x > width - 15 && alien.alive)) {
+      edgeReached = true
+    }
+  }
+  return edgeReached;
+}
+
+// Reverse the horizontal travel direction of the aliens 
+function reverseAlienDirections() {
+  if (alienDirection === 'left') {
+    alienDirection = 'right';
+  } else {
+    alienDirection = 'left';
+  }
+}
+
+// Move aliens downwards
+function moveAllAliensDown() {
+  for (let alien of aliens) {
+    alien.moveVertical();
+  }
+}
+
+// Functionality for moving the aliens across the screen
+function moveAllAliens() {
+  for (let alien of aliens) {
+   alien.moveAliens(alienDirection); 
+  }
+  if (checkIfAliensReachedEdge()) {
+    reverseAlienDirections();
+    moveAllAliensDown();
+  }
+}
+
+// Checks if the dimensions of the players bullets touches the aliens and if so kills the alien and increasese the players points based on the aliens pts parameter
+function hitAlien() {
+  for (let shot of shipShots) {
+    for (let alien of aliens) {
+      if ((shot.x > alien.x - alien.alienWidth / 2) && (shot.x < alien.x + alien.alienWidth / 2) &&
+        (shot.y - shot.length > alien.y - alien.alienHeight / 2) && (shot.y - shot.length < alien.y + alien.alienheight / 2) &&
+        (!shot.hit && alien.alive)) {
+        alien.alive = false;
+        shot.hit = true;
+        score += alien.pts;
+      }
+    }
+  }
+}
+
+// checks if all aliens have been hit
+function allAliensHit() {
+  let test = true;
+  for (let alien of aliens) {
+    if (alien.alive) {
+      test = false;
+    }
+  }
+  return test; 
+}
+
+
+// resets the aliens positions
+function resetAliens() {
+  createAllAliens();
+  if (speed > 2) {
+    speed -= 2;
+  }
+
+}
+
+function fireAlienBullet() {
+  // change of aliens firing bullets would be random
+
+  if (random(100) < chanceOfFiringLaser) {
+    let a = floor(random(aliens.length));
+    if (aliens[i].alive) {
+      let b = new alienBullet(aliens[i].x, aliens[i].y + (aliens[i].alienHeight / 2), alienBulletSpeed, 255);
+      alienShots.push(b)
+    }
+  }
+}
+
+// Draw alien Bullets
+
+function drawAllAlienBullets() {
+  for (let bullet of alienShots) {
+    bullet.draw();
+  }
+}
+
+// move all alien bullets
+function moveAllAlienBullets() {
+  for (let bullet of alienShots) {
+    bullet.move();
+  }
+}
+
+// Show the players score
+function drawScore() {
+  noStroke();
+  fill(255);
+  textSize(28);
+  textAlign(LEFT);
+  text('LIVES: ', width - 325, 54);
+  text('SCORE: ', 50, 54);
+  // Highlight the score if its higher than previous high scores
+  if (highsSCore > 0 && score > highScore) {
+    fill(color(255, 51, 0));
+  }
+  text(score, 170, 54);
+}
+
+
+function playerHit() {
+  for (let bullet of alienShots) {
+    let leftEdgeOfBullet = bullet.x - 2;
+    let rightEdgeofBullet = bullet.x + 2;
+    let frontofBullet = bullet.y + 8;
+    let backofBullet = bullet.y;
+    let leftEdgeOfShip = player.x - (player.shipWidth / 2);
+    let rightEdgeOfShip = player.x + (player.shipWidth / 2);
+    let frontOfShip = player.y - (player.shipHeight / 2);
+    let backOfShip = player.y + (player.shipHeight / 2); 
+
+    if (rightEdgeOfLaser > leftEdgeOfShip &&
+      leftEdgeOfLaser < rightEdgeOfShip &&
+      frontOfLaser > frontOfShip &&
+      backOfLaser < backOfShip &&
+      !bullet.used) {
+      print('player hit!!!');
+      bullet.used = true; // that laser is now used and can't hit player again, or be drawn
+      if (player.lives > 0) {
+        lifeLost();
+      }
+      if (player.lives == 0) {
+        gameOver();
+      }
+    }
   }
 }

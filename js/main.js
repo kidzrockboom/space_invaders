@@ -164,7 +164,7 @@ function register() {
     users.lastname = document.getElementById('lastname').value;
     users.username = document.getElementById('username').value;
     users.email = document.getElementById('email').value;
-    users.password = btoa(document.getElementById('password').value);
+    users.password = document.getElementById('password').value;
 
     localStorage[users.username] = JSON.stringify(users);
     
