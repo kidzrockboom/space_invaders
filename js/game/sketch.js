@@ -1,7 +1,5 @@
 let canvas;
 let player;
-let green;
-let red;
 let backGroundColor;
 let shipShots = []; // stores all shots
 let aliens = []; // stores all aliens
@@ -17,8 +15,8 @@ let alien3a;
 let alien3b;
 let alien4; // red alien ship
 let speed = 10; // aliens move once ever x frames.
-alienBulletSpeed = 10; // speed at which alien laser shots move
-let chanceOfFiringLaser = 50; // x% Chance of aliens firing lasers
+let alienBulletSpeed = 10; // speed at which alien laser shots move
+let chanceOfFiringAlienBullet = 50; // x% Chance of aliens firing lasers
 let alienDirection = 'left'; // Check for alien movement
 let pauseMode = false;
 let pauseTime = 0;
@@ -38,9 +36,9 @@ function preload() {
 function setup() {
   createCanvas(1400, 900);
   noSmooth();
-  frameRate(30);
+  frameRate(10);
   player = new Ship();
-  //createAllAliens();
+  createAllAliens();
   imageMode(CENTER);
 }
 
@@ -70,8 +68,8 @@ function draw() {
     drawAllAlienBullets();
     drawAllAliens();
     hitAlien();
-    hitPlayer();
-    if (allAliensHit) {
+    playerHit();
+    if (allAliensHit()) {
       print('All aliens killed!')
       resetAliens();
     }
@@ -117,7 +115,7 @@ function keyReleased() {
 
 function drawAllShipBullets() {
   for (let bullet of shipShots) {
-    bullet.draw();
+    bullet.drawBullet();
   }
 }
 
@@ -161,7 +159,7 @@ function createAllAliens() {
 
 function drawAllAliens() {
   for (let alien of aliens) {
-    alien.draw();
+    alien.drawAliens();
   }
 }
 
@@ -236,16 +234,16 @@ function resetAliens() {
   if (speed > 2) {
     speed -= 2;
   }
-
+  chanceOfFiringAlienBullet += 10;
 }
 
 function fireAlienBullet() {
   // change of aliens firing bullets would be random
 
-  if (random(100) < chanceOfFiringLaser) {
+  if (random(100) < chanceOfFiringAlienBullet) {
     let a = floor(random(aliens.length));
-    if (aliens[i].alive) {
-      let b = new alienBullet(aliens[i].x, aliens[i].y + (aliens[i].alienHeight / 2), alienBulletSpeed, 255);
+    if (aliens[a].alive) {
+      let b = new alienBullet(aliens[a].x, aliens[a].y + (aliens[a].alienHeight / 2), alienBulletSpeed, 255);
       alienShots.push(b)
     }
   }
@@ -254,8 +252,8 @@ function fireAlienBullet() {
 // Draw alien Bullets
 
 function drawAllAlienBullets() {
-  for (let bullet of alienShots) {
-    bullet.draw();
+  for (let shot of alienShots) {
+    shot.drawBullet();
   }
 }
 
@@ -308,4 +306,68 @@ function playerHit() {
       }
     }
   }
+}
+
+function lifeLost() {
+  pauseTime = frameCount;
+  print('You lost a Life!');
+  player.color = red;
+  pauseMode = true;
+}
+
+// Uses an extra life to bring back the player
+function animateNewLife() {
+  print('Repawning');
+  
+  // Resets the players ship  and resets the aliens bullets and player bullets
+  if (frameCount > pauseTime - 30) {
+    player.color = color(51, 255, 0);
+    player.x - width / 2;
+    pauseMode = false;
+    player.lives -= 1;
+
+    for (let bullet of alienShots) {
+      bullet.used = true;
+    }
+
+    for (let shot of shipShots) {
+      bullet.used = true;
+    }
+  }
+}
+
+// Game over functionality
+function gameOverDesu() {
+  gameOver = true;
+  background(o, 125);
+  print('GAME OVER!');
+  textSize(120);
+  stroke(0);
+  fill(255);
+  textAlign(CENTER);
+  text("GAME OVER", width / 2, height / 2);
+  if (score > highScore) {
+    fill(red);
+    text("NEW HIGH SCORE!!", width / 2, (height / 2) + 125);
+    fill(255);
+  }
+  text("PRESS ENTER TO START ANOTHER ROUND", width / 2, (height / 2) + 175);
+  noLoop();
+}
+
+// Reset game state
+
+function reset() {
+  highScore = score;
+  score = 0;
+  player = new Ship();
+  createAllAliens();
+  for (let bullet of alienShots) {
+    bullet.used = true;
+  }
+
+  for (let shot of shipShots) {
+    bullet.used = true;
+  }
+  loop();
 }

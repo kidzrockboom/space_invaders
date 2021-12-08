@@ -20,7 +20,8 @@
       require_once("php/navbar.php");
       displayNav();
     ?>
-
+    
+    <script src="js/main.js" defer></script>
     <script src="js/game/ship.js" defer></script>
     <script src="js/game/shipBullet.js" defer></script>
     <script src="js/game/alien.js" defer></script>
