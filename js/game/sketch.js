@@ -14,7 +14,7 @@ let alien2b;
 let alien3a;
 let alien3b;
 let alien4; // red alien ship
-let speed = 10; // aliens move once ever x frames.
+let speed = 7; // aliens move once ever x frames.
 let alienBulletSpeed = 10; // speed at which alien laser shots move
 let chanceOfFiringAlienBullet = 50; // x% Chance of aliens firing lasers
 let alienDirection = 'left'; // Check for alien movement
@@ -36,7 +36,7 @@ function preload() {
 function setup() {
   createCanvas(1400, 900);
   noSmooth();
-  frameRate(10);
+  frameRate(15);
   player = new Ship();
   createAllAliens();
   imageMode(CENTER);
@@ -50,7 +50,7 @@ function draw() {
     player.drawPlayer();
     player.moveShip();
     player.drawLives();
-    //drawScore();
+    drawScore();
     if (!pauseMode) {
       moveAllShipBullets();
       moveAllAlienBullets();
@@ -127,32 +127,32 @@ function moveAllShipBullets() {
 
 function createAllAliens() {
   let startingX = 70;
-  let startingY = 200;
+  let startingY = 400;
   // Creates aliens of bottom double rows 
   for (let i = 0; i < 22; i++) {
     aliens[i] = new Alien(startingX, startingY, 45, 45, alien1a, alien1b, 10);
     startingX += 60;
-    if (startingX > width - 30) {
+    if (startingX > width - 60) {
       startingX = 70;
-      startingY -= 30;
+      startingY -= 60;
     }
   }
   // Creates aliens of middle double rows
   for (let i = 22; i < 44; i++) {
     aliens[i] = new Alien(startingX, startingY, 36, 28, alien1a, alien1b, 20);
     startingX += 60;
-    if (startingX > width - 30) {
+    if (startingX > width - 60) {
       startingX = 70;
-      startingY -= 30;
+      startingY -= 60;
     }
   }
   // Creates aliens of top double
   for (let i = 44; i < 55; i++) {
     aliens[i] = new Alien(startingX, startingY, 45, 45, alien1a, alien1b, 50);
     startingX += 60;
-    if (startingX > width - 30) {
+    if (startingX > width - 60) {
       startingX = 70;
-      startingY -= 30;
+      startingY -= 60;
     }
   }
 }
@@ -243,7 +243,7 @@ function fireAlienBullet() {
   if (random(100) < chanceOfFiringAlienBullet) {
     let a = floor(random(aliens.length));
     if (aliens[a].alive) {
-      let b = new alienBullet(aliens[a].x, aliens[a].y + (aliens[a].alienHeight / 2), alienBulletSpeed, 255);
+      let b = new alienBullet(aliens[a].x, aliens[a].y + (aliens[a].alienHeight / 2), alienBulletSpeed, color(255));
       alienShots.push(b)
     }
   }
@@ -260,7 +260,7 @@ function drawAllAlienBullets() {
 // move all alien bullets
 function moveAllAlienBullets() {
   for (let bullet of alienShots) {
-    bullet.move();
+    bullet.moveBullet();
   }
 }
 
@@ -273,7 +273,7 @@ function drawScore() {
   text('LIVES: ', width - 325, 54);
   text('SCORE: ', 50, 54);
   // Highlight the score if its higher than previous high scores
-  if (highsSCore > 0 && score > highScore) {
+  if (highScore > 0 && score > highScore) {
     fill(color(255, 51, 0));
   }
   text(score, 170, 54);
@@ -291,10 +291,10 @@ function playerHit() {
     let frontOfShip = player.y - (player.shipHeight / 2);
     let backOfShip = player.y + (player.shipHeight / 2); 
 
-    if (rightEdgeOfLaser > leftEdgeOfShip &&
-      leftEdgeOfLaser < rightEdgeOfShip &&
-      frontOfLaser > frontOfShip &&
-      backOfLaser < backOfShip &&
+    if (rightEdgeofBullet > leftEdgeOfShip &&
+      leftEdgeOfBullet < rightEdgeOfShip &&
+      frontofBullet > frontOfShip &&
+      backofBullet < backOfShip &&
       !bullet.used) {
       print('player hit!!!');
       bullet.used = true; // that laser is now used and can't hit player again, or be drawn
@@ -302,14 +302,14 @@ function playerHit() {
         lifeLost();
       }
       if (player.lives == 0) {
-        gameOver();
+        gameOverDesu();
       }
     }
   }
 }
 
 function lifeLost() {
-  pauseTime = frameCount;
+  pauseTime = frameCount + 50;
   print('You lost a Life!');
   player.color = red;
   pauseMode = true;
@@ -331,7 +331,7 @@ function animateNewLife() {
     }
 
     for (let shot of shipShots) {
-      bullet.used = true;
+      shot.used = true;
     }
   }
 }
@@ -339,19 +339,19 @@ function animateNewLife() {
 // Game over functionality
 function gameOverDesu() {
   gameOver = true;
-  background(o, 125);
+  background(0, 125);
   print('GAME OVER!');
-  textSize(120);
+  textSize(40);
   stroke(0);
   fill(255);
   textAlign(CENTER);
   text("GAME OVER", width / 2, height / 2);
   if (score > highScore) {
     fill(red);
-    text("NEW HIGH SCORE!!", width / 2, (height / 2) + 125);
+    text("NEW HIGH SCORE!!", width / 2, (height / 2) + 75);
     fill(255);
   }
-  text("PRESS ENTER TO START ANOTHER ROUND", width / 2, (height / 2) + 175);
+  text("PRESS ENTER TO START ANOTHER ROUND", width / 2, (height / 2) + 125);
   noLoop();
 }
 
@@ -359,6 +359,13 @@ function gameOverDesu() {
 
 function reset() {
   highScore = score;
+  if (!sessionStorage.length == 0) {
+    let user = document.getElementById('user');
+
+    let playerId = user.innerHTML;
+
+    sessionStorage.setItem(playerId, highScore);
+  }
   score = 0;
   player = new Ship();
   createAllAliens();

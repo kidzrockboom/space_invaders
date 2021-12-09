@@ -4,7 +4,7 @@ class Ship {
         this.x = width/2;  // initial width
         this.y = height - 2; // initial length 
         this.shipWidth = 50; 
-        this.shipHeight = 18;
+        this.shipHeight = 9;
         this.gunLength = 10;
         this.color = color(255);  // White
         this.direction = 'none'; // initial direction
@@ -25,7 +25,7 @@ class Ship {
 
     // Draw the actual ship
     drawPlayer() {
-        fill(this.color);
+        fill(255);
         rectMode(CENTER);
         noStroke();
         this.drawShip(this.x, this.y);
@@ -35,10 +35,10 @@ class Ship {
     moveShip() {
         if (!pauseMode) {
             if (this.direction === 'left' && this.x > this.shipWidth/2) {
-                this.x -= 5;
+                this.x -= 10;
             }
             if (this.direction === 'right' && this.x < width - this.shipWidth/2) {
-                this.x += 5;
+                this.x += 10;
             }
         }
     }

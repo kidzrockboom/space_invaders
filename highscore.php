@@ -28,36 +28,38 @@
 
         <tbody>
             <tr>
-                <td>Richard</td>
-                <td>100</td>
+                <td class="playerName">Richard</td>
+                <td class="playerScore">100</td>
             </tr>
             <tr class="active-row">
-                <td>Shreyas</td>
-                <td>90</td>
+                <td class="playerName">Shreyas</td>
+                <td class="playerScore">90</td>
             </tr>
             <tr>
-                <td>Jubair</td>
-                <td>80</td>
+                <td class="playerName">Jubair</td>
+                <td class="playerScore">80</td>
             </tr>
             <tr>
-                <td>Anil</td>
-                <td>80</td>
+                <td class="playerName">Anil</td>
+                <td class="playerScore">80</td>
             </tr>
             <tr>
-                <td>Harsha</td>
-                <td>70</td>
+                <td class="playerName">Shirohige</td>
+                <td class="playerScore">70</td>
             </tr>
             <tr>
-                <td>Akshith</td>
-                <td>60</td>
+                <td class="playerName">Akshith</td>
+                <td class="playerScore">60</td>
             </tr>
             <tr>
-                <td>Adesh</td>
-                <td>50</td>
+                <td class="playerName">Adesh</td>
+                <td class="playerScore">50</td>
             </tr>
         </tbody>
     </table>
     
     <script src="js/main.js" defer></script>
+    <script src="js/leaderboard.js" defer></script>
+
 </body>
 </html>

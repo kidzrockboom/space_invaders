@@ -13,7 +13,7 @@ class alienBullet {
     drawBullet () {
         if (!this.used) {
             noFill();
-            stroke(this.c);
+            stroke(this.color);
             strokeWeight(1);
             beginShape();
             vertex(this.x, this.y);

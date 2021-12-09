@@ -15,7 +15,7 @@ class shipBullet {
             line(this.x, this.y, this.x, this.y, - this.length);
             if (this.y < 0) {
                 // When bullet leaves the screen area remove it
-                shots.splice(0, 1); 
+                shipShots.splice(0, 1); 
             }
         }
     }

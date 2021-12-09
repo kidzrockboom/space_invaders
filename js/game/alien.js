@@ -47,10 +47,10 @@ class Alien {
     // Move aliens horizontally across the screen
     moveAliens () {
         if (alienDirection === 'left') {
-            this.x -= 5;
+            this.x -= 10;
         }
         if (alienDirection === 'right') {
-            this.x += 5;
+            this.x += 10;
         }
         if (this.currentImage === 1) {
             this.currentImage = 2;

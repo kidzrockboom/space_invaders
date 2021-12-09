@@ -135,27 +135,6 @@ input[type="file"] {
 
 /* REGISTER FORM END */
 
-.selection {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.selection button {
-    color: white;
-    margin-right: 5px;
-    font-size: 3rem;
-    border: none;
-    background: rgb(91, 182, 235);
-    transition: all 0.3s ease;
-    border-radius: 4px;
-}
-
-.selection button:hover {
-    color: black;
-    background: rgb(255, 255, 255);
-
-}
 
 /* NAVBAR START */
 nav {

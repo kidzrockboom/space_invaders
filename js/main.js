@@ -22,8 +22,18 @@ function showUser() {
     } else {
         let userInfo = sessionStorage.key(0);
         let user = document.getElementById('user');
+        let logoutButton = document.getElementById('logout');
+        logoutButton.setAttribute('id', "logoutB");
 
+        user.style.color = "yellow";
         user.innerHTML = userInfo;
+        logoutB.innerHTML = "LOGOUT";
+        logoutB.setAttribute('href', 'index.php')
+        document.addEventListener('click',function(e){
+            if(e.target && e.target.id== 'logoutB'){
+                clearStorage();
+                }
+            });
     }
 }
 
@@ -32,7 +42,7 @@ values = allStorage();
 
 // Function to clear the current session on user logout 
 function clearStorage() {
-
+    sessionStorage.clear();
 }
 
 // Function to check Login validation 
@@ -44,7 +54,42 @@ function login() {
     let password = document.getElementById('logPassword').value;
     let userHighscore = 0;
 
+    if (sessionStorage.length == 0) {
+        if (Object.keys(localStorage).includes(username)) { // Check if username is in the local storage
+            console.log("Username is valid")
+            // Get the value of the username in local storage
+            let a = JSON.parse(localStorage.getItem(username)); 
+            if (password === a.password) { // Check if password matches password in local storage
+                sessionStorage.setItem(username, userHighscore);
+                console.log("Log In Successful");
+                user.innerHTML = username;
+                user.style.color = "gold";
     
+                let logoutButton = document.getElementById('logout');
+                logoutButton.setAttribute('id', "logoutB");
+                logoutB.innerHTML = "LOGOUT";
+                logoutB.setAttribute('href', 'index.php')
+                document.addEventListener('click',function(e){
+                    if(e.target && e.target.id== 'logoutB'){
+                          clearStorage();
+                     }
+                 });
+                 location.reload();
+            } else {
+                loginInfo.innerHTML = "Password is incorrect";
+                loginInfo.style.fontWeight = "bold";
+                loginInfo.style.color = "black";
+            }
+        } else {
+            loginInfo.innerHTML = "Your Username is invalid";
+            loginInfo.style.fontWeight = "bold";
+            loginInfo.style.color = "black";
+        }
+    } else {
+            loginInfo.innerHTML = "Please LogOut before trying to login again";
+            loginInfo.style.fontWeight = "bold";
+            loginInfo.style.color = "black";
+    }
     if (Object.keys(localStorage).includes(username)) { // Check if username is in the local storage
         console.log("Username is valid")
         // Get the value of the username in local storage
@@ -53,6 +98,17 @@ function login() {
             sessionStorage.setItem(username, userHighscore);
             console.log("Log In Successful");
             user.innerHTML = username;
+
+            let logoutButton = document.getElementById('logout');
+            logoutButton.setAttribute('id', "logoutB");
+            logoutB.innerHTML = "LOGOUT";
+            logoutB.setAttribute('href', 'index.php')
+            document.addEventListener('click',function(e){
+                if(e.target && e.target.id== 'logoutB'){
+                      clearStorage();
+                 }
+             });
+             location.reload();
         } else {
             loginInfo.innerHTML = "Password is incorrect";
             loginInfo.style.fontWeight = "bold";
