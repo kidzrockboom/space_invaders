@@ -15,8 +15,8 @@ let alien3a;
 let alien3b;
 let alien4; // red alien ship
 let speed = 7; // aliens move once ever x frames.
-let alienBulletSpeed = 10; // speed at which alien laser shots move
-let chanceOfFiringAlienBullet = 50; // x% Chance of aliens firing lasers
+let alienBulletSpeed = 10; // speed at which alien bullets move
+let chanceOfFiringAlienBullet = 50; // x% Chance of aliens firing bullets
 let alienDirection = 'left'; // Check for alien movement
 let pauseMode = false;
 let pauseTime = 0;
@@ -147,7 +147,7 @@ function createAllAliens() {
     }
   }
   // Creates aliens of top double
-  for (let i = 44; i < 55; i++) {
+  for (let i = 44; i < 66; i++) {
     aliens[i] = new Alien(startingX, startingY, 45, 45, alien1a, alien1b, 50);
     startingX += 60;
     if (startingX > width - 60) {
@@ -167,7 +167,7 @@ function drawAllAliens() {
 function checkIfAliensReachedEdge() {
   let edgeReached = false;
   for (let alien of aliens) {
-    if ((alien.x < 15 && alien.alive) || (alien.x > width - 15 && alien.alive)) {
+    if ((alien.x < 25 && alien.alive) || (alien.x > width - 25 && alien.alive)) {
       edgeReached = true
     }
   }
@@ -205,11 +205,19 @@ function moveAllAliens() {
 function hitAlien() {
   for (let shot of shipShots) {
     for (let alien of aliens) {
-      if ((shot.x > alien.x - alien.alienWidth / 2) && (shot.x < alien.x + alien.alienWidth / 2) &&
-        (shot.y - shot.length > alien.y - alien.alienHeight / 2) && (shot.y - shot.length < alien.y + alien.alienheight / 2) &&
-        (!shot.hit && alien.alive)) {
+      let leftEdgeOfBullet = shot.x;
+      let frontofBullet = shot.y - shot.length;
+      let leftEdgeOfShip = alien.x - (alien.alienWidth / 2);
+      let rightEdgeOfShip = alien.x + (alien.alienpWidth / 2);
+      let frontOfShip = alien.y - (alien.alienHeight / 2);
+      let backOfShip = alien.y + (alien.alienHeight / 2); 
+
+      if (leftEdgeOfBullet > leftEdgeOfShip && leftEdgeOfBullet < rightEdgeOfShip &&
+        frontofBullet > frontOfShip && frontofBullet < backOfShip &&
+        shot.used && alien.alive) {
+        print('Alien Hit');
         alien.alive = false;
-        shot.hit = true;
+        shot.used = true;
         score += alien.pts;
       }
     }
@@ -259,8 +267,8 @@ function drawAllAlienBullets() {
 
 // move all alien bullets
 function moveAllAlienBullets() {
-  for (let bullet of alienShots) {
-    bullet.moveBullet();
+  for (let shot of alienShots) {
+    shot.moveBullet();
   }
 }
 
@@ -297,7 +305,7 @@ function playerHit() {
       backofBullet < backOfShip &&
       !bullet.used) {
       print('player hit!!!');
-      bullet.used = true; // that laser is now used and can't hit player again, or be drawn
+      bullet.used = true; // that bullet is now used and can't hit player again, or be drawn
       if (player.lives > 0) {
         lifeLost();
       }
@@ -374,7 +382,7 @@ function reset() {
   }
 
   for (let shot of shipShots) {
-    bullet.used = true;
+    shot.used = true;
   }
   loop();
 }

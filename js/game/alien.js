@@ -19,7 +19,7 @@ class Alien {
                 image(this.img1, this.x, this.y, this.alienHeight, this.alienWidth)
             }
             if (this.currentImg === 2) {
-                image(this.img1, this.x, this.y, this.alienHeight, this.alienWidth)
+                image(this.img2, this.x, this.y, this.alienHeight, this.alienWidth)
             }
         }
         if (!this.alive) {

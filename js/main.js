@@ -282,6 +282,7 @@ function register() {
     users.username = document.getElementById('username').value;
     users.email = document.getElementById('email').value;
     users.password = document.getElementById('password').value;
+    users.userHighscore = 0;
 
     localStorage[users.username] = JSON.stringify(users);
     
