@@ -9,7 +9,6 @@ class Alien {
         this.img2 = img2;
         this.currentImg = 1;
         this.pts = points;
-        this.boomTimer = 2;
     }
 
     drawAliens () {
@@ -23,25 +22,16 @@ class Alien {
             }
         }
         if (!this.alive) {
-            if (this.boomTimer > 0) {
-                this.removeAlien()
-                this.boomTimer -= 1;
-            }
+            this.removeAlien();
         }
     }
 
     removeAlien () {
         push();
-        translate(this.x, this.y);
         noFill();
         stroke(255);
         strokeWeight(2);
-        for (let i = 0; i < 10; i++) {
-            line(floor(random(2,8)), 0, floor(random(10,15)), 0);
-            rotate(random(0, ((4 * PI) / 10)));
-        }
         pop();
-
     }
     
     // Move aliens horizontally across the screen

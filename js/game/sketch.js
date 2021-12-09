@@ -139,7 +139,7 @@ function createAllAliens() {
   }
   // Creates aliens of middle double rows
   for (let i = 22; i < 44; i++) {
-    aliens[i] = new Alien(startingX, startingY, 36, 28, alien1a, alien1b, 20);
+    aliens[i] = new Alien(startingX, startingY, 36, 28, alien2a, alien2b, 20);
     startingX += 60;
     if (startingX > width - 60) {
       startingX = 70;
@@ -148,7 +148,7 @@ function createAllAliens() {
   }
   // Creates aliens of top double
   for (let i = 44; i < 66; i++) {
-    aliens[i] = new Alien(startingX, startingY, 45, 45, alien1a, alien1b, 50);
+    aliens[i] = new Alien(startingX, startingY, 45, 45, alien3a, alien3b, 50);
     startingX += 60;
     if (startingX > width - 60) {
       startingX = 70;
@@ -205,16 +205,12 @@ function moveAllAliens() {
 function hitAlien() {
   for (let shot of shipShots) {
     for (let alien of aliens) {
-      let leftEdgeOfBullet = shot.x;
-      let frontofBullet = shot.y - shot.length;
-      let leftEdgeOfShip = alien.x - (alien.alienWidth / 2);
-      let rightEdgeOfShip = alien.x + (alien.alienpWidth / 2);
-      let frontOfShip = alien.y - (alien.alienHeight / 2);
-      let backOfShip = alien.y + (alien.alienHeight / 2); 
-
-      if (leftEdgeOfBullet > leftEdgeOfShip && leftEdgeOfBullet < rightEdgeOfShip &&
-        frontofBullet > frontOfShip && frontofBullet < backOfShip &&
-        shot.used && alien.alive) {
+      if (shot.x > alien.x - alien.alienWidth / 2 &&
+        shot.x < alien.x + alien.alienWidth / 2 &&
+        shot.y - shot.length > alien.y - alien.alienHeight / 2 &&
+        shot.y - shot.length < alien.y + alien.alienHeight / 2 &&
+        !shot.used && alien.alive
+      ) {
         print('Alien Hit');
         alien.alive = false;
         shot.used = true;

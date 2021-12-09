@@ -1,8 +1,8 @@
 class Ship {
     // Contructor for this ship
     constructor() {
-        this.x = width/2;  // initial width
-        this.y = height - 2; // initial length 
+        this.x = width / 2;  // initial width
+        this.y = height - 20; // initial length 
         this.shipWidth = 50; 
         this.shipHeight = 9;
         this.gunLength = 10;
@@ -10,10 +10,7 @@ class Ship {
         this.direction = 'none'; // initial direction
         this.lives = 5; 
         this.shotInterval = 10;  // how often you can fire bullets
-        this.lastShotFired = -this.shotInterval; // check when the last shot was fired
-
-
-        
+        this.lastShotFired = -this.shotInterval; // check when the last shot was fired        
     }
 
     // Draw the design for the players ship
@@ -51,7 +48,7 @@ class Ship {
     fire() {
         // Checks timing for last bullet fired before allowing player to shot again then stores the time of when shots were fired.
         if (frameCount - this.lastShotFired > this.shotInterval) {
-            shipShots.push(new shipBullet(this.x, this.y - (this.shipWidth), 1));
+            shipShots.push(new shipBullet(this.x, this.y - (this.shipHeight), 1));
             this.lastShotFired = frameCount;
         }
     }
