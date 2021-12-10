@@ -180,6 +180,7 @@ function register() {
     let pass1 = document.getElementById('password');
     let pass2 = document.getElementById('confirm-password');
     let RegInfo = document.getElementById('feedback');
+    let time = 2000;
 
     // Checks if inputs fields are empty for important information
     if (user.value === "") {        
@@ -285,5 +286,12 @@ function register() {
 
     localStorage[users.username] = JSON.stringify(users);
     
+    RegInfo.innerHTML = "REGISTRATION SUCCESSFUL";
+    RegInfo.style.fontWeight = "bold";
+    RegInfo.style.color = "black";
+    
+    setTimeout(function(){
+        location.reload();
+     }, time);
     
 }

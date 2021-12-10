@@ -14,8 +14,18 @@ function ScoreBoard () {
     let sortedScores = scores.sort((a, b) => a[1] - b[1]);
 
     if (sortedScores.length > 7) {
-        sortedScores.splice(0,)
-        
+        let topSeven = sortedScores.reverse().splice(0,7)
+        topSeven.reverse();
+        for (let i = 0; i < topSeven.length; i++) {
+            let row = table.insertRow(0);
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            cell1.innerHTML = topSeven[i][0];
+            for (let j = 0; j < 2; j++) {
+                cell2.innerHTML = topSeven[i][j];
+            }
+            
+        }
     } else {
         for (let i = 0; i < sortedScores.length; i++) {
             let row = table.insertRow(0);

@@ -48,12 +48,6 @@
         <input onclick="clearEmail()" type="email" id="email" class="form-input" placeholder="enter your email">
       </div>
 
-      <div class="form-group">
-        <label for="date" class="label-title">date</label>
-        <input type="Date" id="date" class="form-input" placeholder="enter your email">
-      </div>
-
-
       <!-- Password -->
       <div class="horizontal-group">
 
