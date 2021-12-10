@@ -340,14 +340,15 @@ function animateNewLife() {
   }
 }
 
+// Set high score to players info in local storage
 function setHighScore () {
   locHighScore = score;
   
   if (!sessionStorage.length == 0) {
-    a = JSON.parse(localStorage.getItem(sessionStorage.getItem("user")));
-    if (a.userHighscore < score) {
-      a.userHighscore = score;
-      localStorage.setItem(sessionStorage.getItem("user"), JSON.stringify(a)); 
+    playerid = JSON.parse(localStorage.getItem(sessionStorage.getItem("user")));
+    if (playerid.userHighscore < score) {
+      playerid.userHighscore = score;
+      localStorage.setItem(sessionStorage.getItem("user"), JSON.stringify(playerid)); 
     }
   } 
 }
