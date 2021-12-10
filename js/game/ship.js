@@ -39,7 +39,8 @@ class Ship {
             }
         }
     }
-
+    
+    // Call this when you want to change the direction of the player ship
     changeDir(direction) {
         this.direction = direction; 
     }

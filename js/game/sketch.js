@@ -340,6 +340,18 @@ function animateNewLife() {
   }
 }
 
+function setHighScore () {
+  locHighScore = score;
+  
+  if (!sessionStorage.length == 0) {
+    a = JSON.parse(localStorage.getItem(sessionStorage.getItem("user")));
+    if (a.userHighscore < score) {
+      a.userHighscore = score;
+      localStorage.setItem(sessionStorage.getItem("user"), JSON.stringify(a)); 
+    }
+  } 
+}
+
 // Game over functionality
 function gameOverDesu() {
   gameOver = true;
@@ -350,11 +362,14 @@ function gameOverDesu() {
   fill(255);
   textAlign(CENTER);
   text("GAME OVER", width / 2, height / 2);
+  textSize(40);
+  text('Score: ' + score, width / 2, height / 2 + 50)
   if (score > highScore) {
-    fill(red);
-    text("NEW HIGH SCORE!!", width / 2, (height / 2) + 75);
+    fill(color(255, 51, 0));
+    text("NEW HIGH SCORE!!", width / 2, (height / 2) + 55);
     fill(255);
   }
+  setHighScore();
   text("PRESS ENTER TO START ANOTHER ROUND", width / 2, (height / 2) + 125);
   noLoop();
 }
@@ -363,13 +378,6 @@ function gameOverDesu() {
 
 function reset() {
   highScore = score;
-  if (!sessionStorage.length == 0) {
-    let user = document.getElementById('user');
-
-    let playerId = user.innerHTML;
-
-    sessionStorage.setItem(playerId, highScore);
-  }
   score = 0;
   player = new Ship();
   createAllAliens();

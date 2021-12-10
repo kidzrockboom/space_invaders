@@ -20,7 +20,7 @@ function showUser() {
     if (sessionStorage.length == 0){
 
     } else {
-        let userInfo = sessionStorage.key(0);
+        let userInfo = sessionStorage.getItem("user");
         let user = document.getElementById('user');
         let logoutButton = document.getElementById('logout');
         logoutButton.setAttribute('id', "logoutB");
@@ -52,7 +52,6 @@ function login() {
     let loginInfo = document.getElementById('info');
     let username = document.getElementById('logUsername').value;
     let password = document.getElementById('logPassword').value;
-    let userHighscore = 0;
 
     if (sessionStorage.length == 0) {
         if (Object.keys(localStorage).includes(username)) { // Check if username is in the local storage
@@ -60,7 +59,7 @@ function login() {
             // Get the value of the username in local storage
             let a = JSON.parse(localStorage.getItem(username)); 
             if (password === a.password) { // Check if password matches password in local storage
-                sessionStorage.setItem(username, userHighscore);
+                sessionStorage.setItem("user", username);
                 console.log("Log In Successful");
                 user.innerHTML = username;
                 user.style.color = "gold";
@@ -95,7 +94,7 @@ function login() {
         // Get the value of the username in local storage
         let a = JSON.parse(localStorage.getItem(username)); 
         if (password === a.password) { // Check if password matches password in local storage
-            sessionStorage.setItem(username, userHighscore);
+            sessionStorage.setItem("user", username);
             console.log("Log In Successful");
             user.innerHTML = username;
 

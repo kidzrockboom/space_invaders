@@ -26,6 +26,7 @@ class Alien {
         }
     }
 
+    // When the alien gets hit remove it from the array 
     removeAlien () {
         push();
         noFill();
@@ -37,10 +38,10 @@ class Alien {
     // Move aliens horizontally across the screen
     moveAliens () {
         if (alienDirection === 'left') {
-            this.x -= 10;
+            this.x -= 7;
         }
         if (alienDirection === 'right') {
-            this.x += 10;
+            this.x += 7;
         }
         if (this.currentImage === 1) {
             this.currentImage = 2;
@@ -52,6 +53,6 @@ class Alien {
 
     // Move the aliens downward
     moveVertical() {
-        this.y += 25;
+        this.y += 15;
       }
 }

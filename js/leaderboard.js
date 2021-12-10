@@ -1,69 +1,33 @@
-if (!sessionStorage.length == 0) {
-    let user = document.getElementById('user');
+ScoreBoard()
 
-    let playerId = user.innerHTML;
-    let playerScore = sessionStorage.getItem(playerId);
-
-    let playersCol = document.getElementsByClassName('playerName');
-    let playersList = [... playersCol];
-    let players = []
-    for (let i of playersList) {
-        players.push(i.innerHTML);
+function ScoreBoard () {
+    let table = document.getElementById('table');
+    users = Object.keys(localStorage);
+    let scores = [];
+    
+    for (let i = 0; i < users.length; i++) {
+        user = JSON.parse(localStorage.getItem(users[i]));
+        let player = [users[i], user.userHighscore]
+        scores.push(player);
     }
 
-    let topScoresCol = document.getElementsByClassName('playerScore');
-    let topScoresList = [... topScoresCol];
-    let topScores = [];
-    for (let i of topScoresList) {
-        topScores.push(parseInt(i.innerHTML));
-    }
+    let sortedScores = scores.sort((a, b) => a[1] - b[1]);
 
-
-    let playerScores = Object.assign(...players.map((player, i) => ({[player] : topScores[i]})));
-
-    if (players.includes(playerId)) {
+    if (sortedScores.length > 7) {
+        sortedScores.splice(0,)
         
-    }
-
-}
-
-let user = document.getElementById('user');
-user.style.textTransform = "none";
-
-let playerId = user.innerHTML;
-let playerScore = sessionStorage.getItem(playerId);
-
-let playersCol = document.getElementsByClassName('playerName');
-let playersList = [... playersCol];
-let players = []
-for (let i of playersList) {
-    players.push(i.innerHTML);
-}
-
-let topScoresCol = document.getElementsByClassName('playerScore');
-let topScoresList = [... topScoresCol];
-let topScores = [];
-for (let i of topScoresList) {
-    topScores.push(parseInt(i.innerHTML));
-}
-// Code to get a shallow copy of an array and reverse it while working on each element
-topScores.slice().reverse().forEach(x => console.log(x))
-
-let playerScores = Object.assign(...players.map((player, i) => ({[player] : topScores[i]})));
-console.table(playerScores);
-
-if (players.includes(playerId)) {
-    if (playerScores.playerId < sessionStorage.getItem(playerId)) {
-        playerScores.playerId = sessionStorage.getItem(playerId)
-        console.log("Score is updated");
     } else {
-        console.log("You didnt beat your highscore")
-    }
-} else {
-    topScores.forEach(x => {
-        if (condition) {
-            sessionStorage.getItem(playerId);
+        for (let i = 0; i < sortedScores.length; i++) {
+            let row = table.insertRow(0);
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            cell1.innerHTML = sortedScores[i][0];
+            for (let j = 0; j < 2; j++) {
+                cell2.innerHTML = sortedScores[i][j];
+            }
+            
         }
-    });
-    console.log("Player doesnt have a high score")
+    }
+
+    
 }

@@ -259,6 +259,12 @@ span {
   text-align: left;
 }
 
+/* Change the font and make bold the table you are hovering on  */
+.score tbody tr:hover{
+  font-weight: bold;
+  color: #009879;
+}
+
 .score th,
 .score td {
     padding: 12px 15px;
@@ -277,12 +283,6 @@ span {
 /* Add a bolder border to the last row element */
 .score tbody tr:last-of-type {
   border-bottom: 2px solid #009879;
-}
-
-/* Style the active row (this will be changedd with javascript) */
-.score tbody tr.active-row {
-  font-weight: bold;
-  color: #009879;
 }
 
 
